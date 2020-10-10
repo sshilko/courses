@@ -29,6 +29,9 @@ If the folder you open has project/build configuration files like pom.xml or bui
 Migrate Maven Projects to Java 11
 https://winterbe.com/posts/2018/08/29/migrate-maven-projects-to-java-11-jigsaw/
 
+All You Need To Know For Migrating To Java 11
+https://nipafx.dev/java-11-migration-guide#
+
 Maven check updates and install latest
 mvn versions:display-dependency-updates
 mvn versions:use-latest-releases
