@@ -1,4 +1,4 @@
-package java.com.marcusbiel.javaBook.car;
+package com.sshilko.cources.javaBook.car;
 
 public abstract class AbstractCar {
 

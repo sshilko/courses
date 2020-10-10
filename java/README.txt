@@ -22,3 +22,13 @@ https://code.visualstudio.com/docs/java/java-project
 
 Java build tools in VS Code
 https://code.visualstudio.com/docs/java/java-build
+
+VS Code CTRL+SHIFT+P and Use the command "Java: Getting Started"
+If the folder you open has project/build configuration files like pom.xml or build.gradle, they will be picked up automatically and the folder will be treated as a project.
+
+Migrate Maven Projects to Java 11
+https://winterbe.com/posts/2018/08/29/migrate-maven-projects-to-java-11-jigsaw/
+
+Maven check updates and install latest
+mvn versions:display-dependency-updates
+mvn versions:use-latest-releases
