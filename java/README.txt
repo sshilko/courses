@@ -35,3 +35,14 @@ https://nipafx.dev/java-11-migration-guide#
 Maven check updates and install latest
 mvn versions:display-dependency-updates
 mvn versions:use-latest-releases
+
+Micronaut vs quarkus vs Sprint Boot
+https://micronaut.io/blog/2020-04-07-micronaut-vs-quarkus-vs-spring-boot-performance-jdk-14.html
+
+GOTO 2019 • Introduction to Micronaut • Graeme Rocher
+https://www.youtube.com/watch?v=RtjSqRZ_md4
+
+Micronaut Functions in GraalVM Native Images deployed to AWS Lambda
+https://guides.micronaut.io/micronaut-function-graalvm-aws-lambda-gateway/guide/index.html
+https://github.com/micronaut-guides/micronaut-function-graalvm-aws-lambda-gateway
+
