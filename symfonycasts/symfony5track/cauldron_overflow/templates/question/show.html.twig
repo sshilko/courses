@@ -1,0 +1,21 @@
+{%  extends 'base.html.twig' %}
+
+{% block title %}Question: {{ question }}{% endblock %}
+
+{% block body %}
+<h1>{{ question }}</h1>
+
+{#  comment here #}
+
+<div>
+    Eventually, some full questions here! {{ fookijasdfasdfautocompleteme }}
+</div>
+
+<h2>Answers ({{ answers|length }})</h2>
+
+<ul>
+    {% for k,v in answers %}
+        <li>{{ k }}:{{ v }}</li>
+    {%  endfor %}
+</ul>
+{%  endblock %}
