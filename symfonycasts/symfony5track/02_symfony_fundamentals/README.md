@@ -88,8 +88,25 @@ composer dump-env prod --empty
 #https://symfony.com/doc/current/deployment.html
 
 #populate dev secret vault
-php bin/console secret:set SOMESECRET --env=dev
+php bin/console secrets:generate-keys
+php bin/console secrets:generate-keys --rotate
 
+php bin/console secret:set SENTRY_DSN --env=dev
+
+
+php bin\console secret:list --env=dev
+php bin\console secret:list --reveal
+
+composer require maker --dev
+php bin/console make:
+
+php bin/console make:command - "app:random-spell"
+php bin/console app:random-spell
+php bin/console app:random-spell --help
+php bin/console app:random-spell andrew
+php bin/console app:random-spell andrew --yell
+
+php bin/console make:twig-extension - "MarkdownExtension"
 
 ```
 

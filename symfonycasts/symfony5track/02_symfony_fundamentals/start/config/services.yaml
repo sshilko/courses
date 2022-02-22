@@ -22,6 +22,7 @@ parameters:
 
     env(MAINTENANCE_MODE): "false"
     app.maintenance_mode: '%env(bool:MAINTENANCE_MODE)%'
+    sentry_secret: '%env(SENTRY_DSN)%'
     #define env via param and chain <--
 
 services:
