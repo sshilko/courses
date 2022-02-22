@@ -66,6 +66,31 @@ services:
 php bin/console.php debug:container --parameters
 php bin/console.php debug:container --parameters --env=prod
 
+#info about app
+php bin/console.php about
+
+#access environment variables and params
+https://medium.com/@votanlean/symfony-parameters-and-environment-variables-ac916524ab49
+
+bind or parameters or ContainerBagInterface or ContainerInterface
+
+#value in .env file will not override the machine environment variable
+
+Env processors
+#https://symfony.com/doc/5.4/configuration/env_var_processors.html
+
+php bin/console debug:container --env-vars
+php bin/console debug:container --env-vars foo
+php bin/console debug:container --parameters
+
+composer dump-env prod
+composer dump-env prod --empty
+#https://symfony.com/doc/current/deployment.html
+
+#populate dev secret vault
+php bin/console secret:set SOMESECRET --env=dev
+
+
 ```
 
 

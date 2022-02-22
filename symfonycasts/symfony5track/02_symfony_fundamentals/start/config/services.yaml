@@ -6,6 +6,24 @@
 parameters:
     cache_adapter: cache.adapter.apcu
 
+    #define env via param and chain -->
+    #https://medium.com/@votanlean/symfony-parameters-and-environment-variables-ac916524ab49
+    env(AAAMYHOST): '10.0.0.1'
+    somehost1: '%env(AAAMYHOST)%'
+    #can be accessed as ->getParams('env(SOME_ENV)')
+    env(SOME_ENV): "http://%somehost1%/project"
+    #By assigning environment variable to parameter, we have 3 benefits:
+
+    #1 thank to Environment Variable Processors,
+    #1 we can cast the environment variable to the type we want such as int, string, bool, json decode…
+    #2 we can define default value if there is no such environment variable
+    #3 we limit the way service can get external variable
+    some_dsn: '%env(resolve:SOME_ENV)%'
+
+    env(MAINTENANCE_MODE): "false"
+    app.maintenance_mode: '%env(bool:MAINTENANCE_MODE)%'
+    #define env via param and chain <--
+
 services:
     # default configuration for services in *this* file
     _defaults:
