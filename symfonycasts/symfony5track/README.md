@@ -51,6 +51,19 @@ php bin/console debug:router
 
 #https://symfony.com/doc/5.4/routing.html
 php bin/console router:match /comments/10/vote/up --method=POST
+
+#install symfony/webpack-encore-bundle (requires node nvm yarn)
+composer require encore
+
+#install node dependencies into node_modules vendor dir
+yarn install
+
+#encore dev --watch
+yarn watch 
+
+yarn add jquery --dev
+yarn add bootstrap --dev
+
 ```
 
 
