@@ -17,7 +17,9 @@ http://localhost:8000/
 
 https://symfony.com/doc/current/service_container.html
 ```
+#almost full list of symfony service objects
 php bin/console debug:autowiring
+php bin/console debug:autowiring log
 ```
 
 https://symfonycasts.com/tracks/symfony
@@ -29,11 +31,26 @@ https://symfonycasts.com/tracks/symfony6
 [Symfony 4: Best Practices Fabien Potencier April 07, 2017](http://fabien.potencier.org/symfony4-best-practices.html)
 
 ```
+#route annotations & param converters
 #sensio/framework-extra-bundle
 composer require annotations
 
+#route annotations via `composer require doctrine/annotations`
+
 #sensiolabs/security-checker
 composer require sec-checker --no-scripts
+
+#only add to dev section of composer (with --dev)
+composer require profiler --dev
+
+composer require debug
+php bin\console server:dump
+
+composer require symfony/asset
+php bin/console debug:router
+
+#https://symfony.com/doc/5.4/routing.html
+php bin/console router:match /comments/10/vote/up --method=POST
 ```
 
 
