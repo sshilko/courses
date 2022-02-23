@@ -135,6 +135,10 @@ symfony console make:factory
 #https://github.com/stof/StofDoctrineExtensionsBundle
 #https://symfony.com/bundles/StofDoctrineExtensionsBundle/current/index.html
 
+#sluggable: true
+#timestampable: true
+
 composer require stof/doctrine-extensions-bundle
 
+#Postgres transactional DDL changes (bundle changes to one, to avoid corrupt migrations)
 ```

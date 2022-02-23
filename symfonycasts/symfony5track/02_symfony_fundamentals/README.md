@@ -28,6 +28,8 @@ yarn encore dev --watch
 
 #Enable symfony for this project in PHPStorm
 
+composer require knplabs/knp-markdown-bundle
+
 php bin/console.php config:dump KnpMarkdownBundle
 
 php bin/console.php debug:autowiring
