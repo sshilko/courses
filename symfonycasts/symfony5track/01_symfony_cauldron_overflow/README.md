@@ -43,6 +43,7 @@ composer require sec-checker --no-scripts
 #only add to dev section of composer (with --dev)
 composer require profiler --dev
 
+#symfony var dumper server (second server to output dumps)
 composer require debug
 php bin\console server:dump
 
@@ -61,6 +62,7 @@ yarn install
 #encore dev --watch
 yarn watch 
 
+#https://symfony.com/doc/current/frontend/encore/simple-example.html
 yarn add jquery --dev
 yarn add bootstrap --dev
 

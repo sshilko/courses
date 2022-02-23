@@ -79,5 +79,62 @@ symfony console doctrine:migrations:list
 symfony console make:migration
 symfony console doctrine:migrations:migrate
 
+#need to update to symfony 5.3 to continue with time bundle in twig
+#go to composer.json and replace "5.1." with "5.3." bacause time-bundle has some package conflicts etc.
+composer update "symfony/*" --with-dependencies
+
+#now install bundle (provides twig "|ago" filter)
+composer require knplabs/knp-time-bundle
+
+#things can have as controller arguments
+* An argument whose "name" matches a route {wildcard}
+@Route("/article{slug}")
+public function example($slug)
+
+Autowire a service via its type-hint
+@Route("/article{slug}")
+public function example(LoggerInterface $logger)
+
+Autowire an entity class to automatically query for that entity
+@Route("/article{slug}")
+public function example(ArticleEntity $article)
+
+Autowire a Request class Symfony\Component\HttpFoundation\Request that contains request data
+@Route("/article{slug}")
+public function example(Request $request)
+
+
+and other usual things like
+> repositories
+> binded/params global or specified in config/services.yml
+
+
+#only needed to add new object, or make entityManager aware of entity
+#if objects comes FROM entityManager, no need to do persist (optional)
+$entityManager->persist($entity)
+
+symfony console debug:twig
+
+#Doctrine fixtures
+composer require orm-fixtures --dev
+
+symfony console doctrine:fixtures:load
+
+
+#Fixtures factory
+https://github.com/zenstruck/foundry
+https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html
+
+composer require zenstruck/foundry --dev
+
+# To use the make:* commands from this bundle, ensure Symfony MakerBundle is installed.
+# via composer require maker --dev
+
+symfony console make:factory
+
+#https://github.com/stof/StofDoctrineExtensionsBundle
+#https://symfony.com/bundles/StofDoctrineExtensionsBundle/current/index.html
+
+composer require stof/doctrine-extensions-bundle
 
 ```
