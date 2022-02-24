@@ -34,6 +34,10 @@ final class AnswerFactory extends ModelFactory
 
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
     }
+    public function needsApproval(): self
+    {
+        return $this->addState(['status' => Answer::STATUS_NEEDS_APPROVAL]);
+    }
 
     protected function getDefaults(): array
     {
@@ -48,7 +52,8 @@ final class AnswerFactory extends ModelFactory
             #set relation property to entity instance, instantly write to db via create()
 #            'question' => QuestionFactory::new()->unpublished()->create()
             #set relation property to entity factory instance, allows to delay creation to later
-            'question' => QuestionFactory::new()->unpublished()
+            'question' => QuestionFactory::new()->unpublished(),
+            'status' => Answer::STATUS_APPROVED
         ];
     }
 

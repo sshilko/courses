@@ -54,3 +54,11 @@ symfony console doctrine:fixtures:load
 
 Mapping ManyToOne is required, but OneToMany not (optional); Many Answers to One Questions. Foreign key in db in on answers table. Questions table has not FK/etc.
 
+Cant inject service objects into Entity, rather create i.e. Criteria in Repository and use inside entity objec, as static function
+
+Criteria is reusable in DQL builder (inside repository for building where etc.)
+
+composer require twig/string-extra
+
+https://symfony.com/doc/current/components/string.html
+symfony string '|u' twig modifier and '|u.truncate'

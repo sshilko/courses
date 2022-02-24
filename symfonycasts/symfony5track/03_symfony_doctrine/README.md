@@ -86,7 +86,7 @@ composer update "symfony/*" --with-dependencies
 #now install bundle (provides twig "|ago" filter)
 composer require knplabs/knp-time-bundle
 
-#things can have as controller arguments
+#things that could be a controller arguments -->
 * An argument whose "name" matches a route {wildcard}
 @Route("/article{slug}")
 public function example($slug)
@@ -141,4 +141,10 @@ symfony console make:factory
 composer require stof/doctrine-extensions-bundle
 
 #Postgres transactional DDL changes (bundle changes to one, to avoid corrupt migrations)
+
+
+Basically... every single thing that Symfony does - or that we do - is actually done by one of these useful objects. Heck, even the router is an object that figures out which route matches the current request.
+
+In the Symfony world - well, really, in the object-oriented programming world - these "objects that do work" are given a special name: services. But don't let that confuse you: when you hear "service", just think:
+
 ```

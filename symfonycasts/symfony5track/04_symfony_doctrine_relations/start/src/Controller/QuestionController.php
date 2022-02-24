@@ -107,6 +107,7 @@ class QuestionController extends AbstractController
      */
     public function questionVote(Question $question, Request $request, EntityManagerInterface $entityManager)
     {
+        #access POST data, unencoded
         $direction = $request->request->get('direction');
 
         if ($direction === 'up') {
