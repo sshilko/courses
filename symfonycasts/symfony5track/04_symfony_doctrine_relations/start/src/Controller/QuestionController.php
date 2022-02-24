@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
 use App\Entity\Question;
 use App\Repository\QuestionRepository;
 use App\Service\MarkdownHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,14 +46,18 @@ class QuestionController extends AbstractController
         return new Response('Sounds like a GREAT feature for V2!');
     }
 
+
     /**
-     * @Route("/questions/{slug}", name="app_question_show")
+     * @Route("/questions/{id<\d+>}", name="app_question_showbyid")
      */
-    public function show(Question $question)
+    public function showbyid(Question $question, EntityManagerInterface $entityManager)
     {
         if ($this->isDebug) {
-            $this->logger->info('We are in debug mode!');
+            $this->logger->info('We are in AAA mode!');
         }
+
+        #$arepo = $entityManager->getRepository(Answer::class);
+        #$answers = $arepo->findBy(['question' => $question]);
 
         $answers = [
             'Make sure your cat is sitting `purrrfectly` still 🤣',
@@ -64,6 +70,37 @@ class QuestionController extends AbstractController
             'answers' => $answers,
         ]);
     }
+
+    /**
+     * @Route("/questions/{slug}", name="app_question_show")
+     */
+    public function show(Question $question)
+    {
+        if ($this->isDebug) {
+            $this->logger->info('We are in debug mode!');
+        }
+
+        return $this->render('question/show.html.twig', [
+            'question' => $question
+        ]);
+    }
+
+//    /**
+//     * @Route("/questions/{slug}", name="app_question_show")
+//     */
+//    public function show(Question $question)
+//    {
+//        if ($this->isDebug) {
+//            $this->logger->info('We are in debug mode!');
+//        }
+//
+//        $answers = $question->getAnswers();
+//
+//        return $this->render('question/show.html.twig', [
+//            'question' => $question,
+//            'answers' => $answers,
+//        ]);
+//    }
 
     /**
      * @Route("/questions/{slug}/vote", name="app_question_vote", methods="POST")

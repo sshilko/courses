@@ -52,4 +52,5 @@ symfony console doctrine:fixtures:load
 
 #check homepage for working server, db etc. all should be as from last course, but symfony5.3.7
 
-```
+Mapping ManyToOne is required, but OneToMany not (optional); Many Answers to One Questions. Foreign key in db in on answers table. Questions table has not FK/etc.
+
