@@ -7,6 +7,7 @@ use App\Entity\Question;
 use App\Entity\Tag;
 use App\Factory\AnswerFactory;
 use App\Factory\QuestionFactory;
+use App\Factory\QuestionTagFactory;
 use App\Factory\TagFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -17,13 +18,19 @@ class AppFixtures extends Fixture
     {
         TagFactory::createMany(100);
 
+        QuestionTagFactory::createMany(10);
+
+        return;
+
+        $questions = QuestionFactory::createMany(20);
+
 //        $questions = QuestionFactory::createMany(20, [
 //            'tags' => TagFactory::randomRange(0, 5)
 //        ]);
 
-        $questions = QuestionFactory::createMany(20, function() {
-            return ['tags' => TagFactory::randomRange(0, 5)];
-        });
+        #$questions = QuestionFactory::createMany(20, function() {
+        #    return ['tags' => TagFactory::randomRange(0, 5)];
+        #});
 
 
         QuestionFactory::new()
@@ -96,8 +103,8 @@ class AppFixtures extends Fixture
         $tag2 = new Tag();
         $tag2->setName('monster trucks');
 
-        $tag1->addQuestion($question);
-        $tag2->addQuestion($question);
+        #$tag1->addQuestion($question);
+        #$tag2->addQuestion($question);
 
         $manager->persist($tag1);
         $manager->persist($tag2);
