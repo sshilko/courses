@@ -69,3 +69,4 @@ symfony string '|u' twig modifier and '|u.truncate'
 
 composer require babdev/pagerfanta-bundle
 composer require pagerfanta/doctrine-orm-adapter
+composer require pagerfanta/twig

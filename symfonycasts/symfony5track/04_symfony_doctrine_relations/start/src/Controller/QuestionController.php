@@ -29,9 +29,10 @@ class QuestionController extends AbstractController
 
 
     /**
-     * @Route("/", name="app_homepage")
+     * @Route("/{page<\d+>}", name="app_homepage")
      */
-    public function homepage(QuestionRepository $repository)
+   #public function homepage(QuestionRepository $repository, Request $request, int $page = 1)
+    public function homepage(QuestionRepository $repository, int $page = 1)
     {
         $qbuilder = $repository->createAskedOrderedByNewestQueryBuilder();
 
@@ -39,11 +40,12 @@ class QuestionController extends AbstractController
             new QueryAdapter($qbuilder)
         );
         $pagerfanta->setMaxPerPage(5);
+#        $pagerfanta->setCurrentPage($request->query->get('page', 1));
+        $pagerfanta->setCurrentPage($page);
 
         return $this->render('question/homepage.html.twig', [
             'pager' => $pagerfanta,
         ]);
-
 
 //        return $this->render('question/homepage.html.twig', [
 //            'questions' => $questions,
