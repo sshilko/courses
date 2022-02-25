@@ -18,11 +18,40 @@ class AppFixtures extends Fixture
     {
         TagFactory::createMany(100);
 
-        QuestionTagFactory::createMany(10);
+        #QuestionTagFactory::createMany(10);
 
-        return;
+        #$questions = QuestionFactory::createMany(20);
 
-        $questions = QuestionFactory::createMany(20);
+//        $questions = QuestionFactory::createMany(20, [
+//            'questionTags' => QuestionTagFactory::randomRange(0, 5)
+//        ]);
+
+        $questions = QuestionFactory::createMany(20, function() {
+            /**
+             * QuestionTagFactory inside is aware that it's being called by QuestionFactory
+             * it will RE-USE Question instead of creating a new one inside QuestionTagFactory::new()
+             *
+             * but we have addQuestionTag and removeQuestionTag, but
+             * NO setQuestionTag in App\Entity\Question
+             * accessor is smart to use those
+             * but it expects array/collection, WORK AROUND with many(1)
+             */
+            return ['questionTags' => QuestionTagFactory::new(function() {
+                /**
+                 * use callback to randomize on EACH of Question creation
+                 */
+                return ['tag' => TagFactory::random()];
+            })->many(1, 5)];
+        });
+        /** ABOVE AND BELOW IS SAME AS PRE-CREATING questions and tags */
+        #$questions = QuestionFactory::createMany(20);
+//        QuestionTagFactory::createMany(100, function() {
+//            return [
+//                'tag' => TagFactory::random(),
+//                'question' => QuestionFactory::random(),
+//            ];
+//        });
+
 
 //        $questions = QuestionFactory::createMany(20, [
 //            'tags' => TagFactory::randomRange(0, 5)
