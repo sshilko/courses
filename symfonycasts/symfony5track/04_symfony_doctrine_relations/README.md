@@ -62,3 +62,10 @@ composer require twig/string-extra
 
 https://symfony.com/doc/current/components/string.html
 symfony string '|u' twig modifier and '|u.truncate'
+
+#Pagination library for PHP applications with support for several data #providers
+#https://github.com/BabDev/Pagerfanta
+#https://packagist.org/packages/babdev/pagerfanta-bundle
+
+composer require babdev/pagerfanta-bundle
+composer require pagerfanta/doctrine-orm-adapter
