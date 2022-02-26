@@ -19,8 +19,19 @@ security:
             lazy: true
             provider: app_user_provider
             #entry_point: App\Security\LoginFormAuthenticator
-            custom_authenticator: App\Security\LoginFormAuthenticator
+            #custom_authenticator: App\Security\LoginFormAuthenticator
             #listener to any requests to /logout
+
+            entry_point: form_login
+            #pre-build symfony authenticator
+            form_login:
+                login_path: app_login #named path: login controller
+                check_path: app_login #named path: submit to controller
+                username_parameter: email #read input.name='email'
+                password_parameter: password #read input.name='password'
+                csrf_token_id: authenticateTokenMyId1
+                enable_csrf: true
+
             logout:
                 path: '/logout'
                 target: /

@@ -76,4 +76,15 @@ new RememberMeBadge()
 
 $request->getSession()
 
+
+#built-in form authenticator is
+class FormLoginAuthenticator extends AbstractLoginFormAuthenticator
+
+#Most options
+symfony console debug:config security
+
+#FULL/ALL options
+symfony console config:dump security
+
+
 ```
