@@ -62,4 +62,10 @@ name can be anything, but _csrf_token is standard name
 'authenticate' argument is also just unique identifier, can be any unique string
 
 
+symfony console debug:config security
+
+<input type="checkbox" name="_remember_me" class="form-check-input"> Remember me
+
+new RememberMeBadge()
+
 ```

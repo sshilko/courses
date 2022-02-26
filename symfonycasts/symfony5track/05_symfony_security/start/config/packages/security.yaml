@@ -23,6 +23,10 @@ security:
             logout:
                 path: '/logout'
                 target: /
+            #rememberMeAuthenticator
+            remember_me:
+                #will sign the cookie using our app-secret
+                secret: '%kernel.secret%'
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
