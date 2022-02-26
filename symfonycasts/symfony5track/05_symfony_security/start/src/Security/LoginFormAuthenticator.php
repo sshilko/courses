@@ -4,25 +4,31 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CustomCredentials;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 
 class LoginFormAuthenticator extends AbstractAuthenticator
 {
     private $userRepo;
+    private RouterInterface $router;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, RouterInterface $router)
     {
         $this->userRepo = $entityManager->getRepository(User::class);
-
+        $this->router = $router;
     }
 
     public function supports(Request $request): ?bool
@@ -46,21 +52,32 @@ class LoginFormAuthenticator extends AbstractAuthenticator
                 }
                 return $user;
             }),
-            new CustomCredentials(function ($credentials, User $user) {
-                dd($credentials, $user);
-
-            }, $passw)
+            new PasswordCredentials($passw),
+            [
+                new CsrfTokenBadge('authenticate',
+                $request->request->get('_csrf_token'))
+            ]
+//            new CustomCredentials(function ($credentials, User $user) {
+//                /**
+//                 * return true = success
+//                 *        fakse = auth fail
+//                 */
+//                return $credentials === 'tada';
+//                //dd($credentials, $user);
+//            }, $passw)
         );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // TODO: Implement onAuthenticationSuccess() method.
+        return new RedirectResponse($this->router->generate('app_homepage'));
+
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        // TODO: Implement onAuthenticationFailure() method.
+        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+        return new RedirectResponse($this->router->generate('app_login'));
     }
 
 //    public function start(Request $request, AuthenticationException $authException = null): Response
