@@ -27,6 +27,10 @@ security:
             remember_me:
                 #will sign the cookie using our app-secret
                 secret: '%kernel.secret%'
+                #ignore checkbox value on|off
+                always_remember_me: true
+                signature_properties:
+                    - password
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

@@ -57,7 +57,7 @@ class LoginFormAuthenticator extends AbstractAuthenticator
             [
                 new CsrfTokenBadge('authenticateTokenMyId1', $request->request->get('_csrf_token')),
                 #deals with _remember_me post checkbox
-                new RememberMeBadge()
+                (new RememberMeBadge())->enable()
             ]
 //            new CustomCredentials(function ($credentials, User $user) {
 //                /**

@@ -68,4 +68,7 @@ symfony console debug:config security
 
 new RememberMeBadge()
 
+#always enable, ignore whatever checkbox value was
+(new RememberMeBadge())->enable()
+
 ```
