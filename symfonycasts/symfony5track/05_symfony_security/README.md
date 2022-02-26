@@ -87,4 +87,22 @@ symfony console debug:config security
 symfony console config:dump security
 
 
+        return $this->render('security/login.html.twig', [
+            'error' => $authenticationUtils->getLastAuthenticationError(),
+            'last_username' => $authenticationUtils->getLastUsername()
+        ]);
+
+#deny access in controller
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+#or check access
+        if (!$this->isGranted('ROLE_USER')) {
+            #do stuff
+        }
+
+     * @IsGranted("ROLE_ADMIN")
+
+     twig                      {% if is_granted('ROLE_ADMIN') %}
+     
+
 ```
