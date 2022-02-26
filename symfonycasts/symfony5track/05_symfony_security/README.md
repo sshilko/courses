@@ -71,4 +71,9 @@ new RememberMeBadge()
 #always enable, ignore whatever checkbox value was
 (new RememberMeBadge())->enable()
 
+#get access to anonymous last url when login
+    use TargetPathTrait;
+
+$request->getSession()
+
 ```
