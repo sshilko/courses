@@ -130,6 +130,16 @@ Role hierarchy
 
 composer require serializer
 
+     * @Groups("user:read")
 
+composer require form validator
+
+symfony console make:registration-form
+
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    form_themes:
+        - bootstrap_5_layout.html.twig
+        
 
 ```
