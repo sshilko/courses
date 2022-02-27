@@ -114,7 +114,7 @@ Global twig object
 
 https://ui-avatars.com/api/?name={{ app.user.firstName|url_encode }}&size=32&background=random                        
 
-
+#insert service first
 ... Security $security ...
         if ($this->security->getUser()) {
 
@@ -140,6 +140,22 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes:
         - bootstrap_5_layout.html.twig
-        
+
+symfony console debug:container form_login
+
+
+$this->denyAccessUnlessGranted('EDIT_MY_RANDOM_ATTR1');
+
+symfony console make:voter
+
+composer require symfonycasts/verify-email-bundle
+
+
+$this->addFlash('success', 'Confirm your email at: ' . $signatureComponent->getSignedUrl());
+
+        {%  for flash in app.flashes('success') %}
+            <div class="alert alert-success">{{ flash }}</div>        
+        {%  endfor %}
+
 
 ```
