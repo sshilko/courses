@@ -174,7 +174,7 @@ symfony console debug:event --dispatcher=security.event_dispatcher.main
             throw new CustomUserMessageAuthenticationException('Cant login w/o verifying email');
 
 
-
+composer require endroid/qr-code
 
 
 ```
