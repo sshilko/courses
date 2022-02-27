@@ -157,5 +157,24 @@ $this->addFlash('success', 'Confirm your email at: ' . $signatureComponent->getS
             <div class="alert alert-success">{{ flash }}</div>        
         {%  endfor %}
 
+composer require symfony/rate-limiter
+
+
+            login_throttling:
+                max_attempts: 5
+                interval: '1 minute'
+                lock_factory: null
+
+symfony console debug:event
+
+                
+symfony console debug:event --dispatcher=security.event_dispatcher.main
+
+            //throw new AuthenticationException();
+            throw new CustomUserMessageAuthenticationException('Cant login w/o verifying email');
+
+
+
+
 
 ```

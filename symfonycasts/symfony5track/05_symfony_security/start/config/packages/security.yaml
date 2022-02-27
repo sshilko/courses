@@ -40,6 +40,8 @@ security:
             #222 also authenticator ?_switch_user=<getUserIdentifier>; SwitchUserAuthenticator
             switch_user: true
 
+            login_throttling: true
+
             logout:
                 path: '/logout'
                 target: /
