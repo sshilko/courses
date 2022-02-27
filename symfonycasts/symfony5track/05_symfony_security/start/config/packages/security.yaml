@@ -1,6 +1,11 @@
 security:
     enable_authenticator_manager: true
     hide_user_not_found: false
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_COMMENT_ADMIN, ROLE_USER_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_HUMAN_RESOURCES: [ROLE_USER_ADMIN]
+
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
@@ -23,7 +28,7 @@ security:
             #listener to any requests to /logout
 
             entry_point: form_login
-            #pre-build symfony authenticator
+            #111 pre-build symfony authenticator
             form_login:
                 login_path: app_login #named path: login controller
                 check_path: app_login #named path: submit to controller
@@ -32,11 +37,14 @@ security:
                 csrf_token_id: authenticateTokenMyId1
                 enable_csrf: true
 
+            #222 also authenticator ?_switch_user=<getUserIdentifier>; SwitchUserAuthenticator
+            switch_user: true
+
             logout:
                 path: '/logout'
                 target: /
 
-            #rememberMeAuthenticator
+            #333 rememberMeAuthenticator
             remember_me:
                 #will sign the cookie using our app-secret
                 secret: '%kernel.secret%'
@@ -54,6 +62,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/admin, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }

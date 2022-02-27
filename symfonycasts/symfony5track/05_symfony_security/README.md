@@ -54,6 +54,8 @@ $request->getSession()->set();
 error.messageKey is safe for output to user    
 "Message key to be used by the translation component."
 
+{{ error.messageKey|trans(error.messageData, 'security') }}
+
 
 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
@@ -103,6 +105,31 @@ symfony console config:dump security
      * @IsGranted("ROLE_ADMIN")
 
      twig                      {% if is_granted('ROLE_ADMIN') %}
-     
+
+#not a role, just true/false IS_* flags
+ {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+Global twig object
+                        {{ app.user.firstName }}
+
+https://ui-avatars.com/api/?name={{ app.user.firstName|url_encode }}&size=32&background=random                        
+
+
+... Security $security ...
+        if ($this->security->getUser()) {
+
+        }
+
+
+Role hierarchy
+
+#give admin additionnal roles
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_COMMENT_ADMIN, ROLE_USER_ADMIN]
+        ROLE_HUMAN_RESOURCES: [ROLE_USER_ADMIN]
+
+composer require serializer
+
+
 
 ```
