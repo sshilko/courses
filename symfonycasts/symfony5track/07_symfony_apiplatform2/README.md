@@ -18,6 +18,14 @@ composer update
 
 yarn install
 
+#update composer to symfony 4.* in packages and at end
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "4.3.*|4.4.*"
+        }
+    },
+
 set NODE_OPTIONS=--openssl-legacy-provider
 
 yarn encore dev --watch

@@ -14,21 +14,21 @@
         "nelmio/cors-bundle": "^2.2",
         "nesbot/carbon": "^2.17",
         "phpdocumentor/reflection-docblock": "^5.3",
-        "symfony/asset": "4.3.*",
-        "symfony/console": "4.3.*",
-        "symfony/dotenv": "4.3.*",
-        "symfony/expression-language": "4.3.*",
+        "symfony/asset": "4.*",
+        "symfony/console": "4.*",
+        "symfony/dotenv": "4.*",
+        "symfony/expression-language": "4.*",
         "symfony/flex": "^1.1",
-        "symfony/framework-bundle": "4.3.*",
-        "symfony/property-access": "4.3.*",
-        "symfony/property-info": "4.3.*",
-        "symfony/proxy-manager-bridge": "4.3.*",
-        "symfony/security-bundle": "4.3.*",
-        "symfony/serializer": "4.3.*",
-        "symfony/twig-bundle": "4.3.*",
-        "symfony/validator": "4.3.*",
+        "symfony/framework-bundle": "4.*",
+        "symfony/property-access": "4.*",
+        "symfony/property-info": "4.*",
+        "symfony/proxy-manager-bridge": "4.*",
+        "symfony/security-bundle": "4.*",
+        "symfony/serializer": "4.*",
+        "symfony/twig-bundle": "4.*",
+        "symfony/validator": "4.*",
         "symfony/webpack-encore-bundle": "^1.6",
-        "symfony/yaml": "4.3.*"
+        "symfony/yaml": "4.*"
     },
     "config": {
         "preferred-install": {
@@ -73,12 +73,12 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.3.*"
+            "require": "4.3.*|4.4.*"
         }
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.11",
-        "symfony/stopwatch": "4.3.*",
-        "symfony/web-profiler-bundle": "4.3.*"
+        "symfony/stopwatch": "4.3.*|4.4.*",
+        "symfony/web-profiler-bundle": "4.3.*|4.4.*"
     }
 }

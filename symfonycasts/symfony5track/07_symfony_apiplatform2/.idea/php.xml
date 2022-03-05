@@ -73,17 +73,12 @@
       <path value="$PROJECT_DIR$/start/vendor/symfony/doctrine-bridge" />
       <path value="$PROJECT_DIR$/start/vendor/doctrine/orm" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/inflector" />
-      <path value="$PROJECT_DIR$/start/vendor/doctrine/reflection" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/mime" />
-      <path value="$PROJECT_DIR$/start/vendor/ocramius/proxy-manager" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/cache-contracts" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/start/vendor/webimpress/safe-writer" />
-      <path value="$PROJECT_DIR$/start/vendor/laminas/laminas-eventmanager" />
       <path value="$PROJECT_DIR$/start/vendor/laminas/laminas-code" />
-      <path value="$PROJECT_DIR$/start/vendor/laminas/laminas-zendframework-bridge" />
       <path value="$PROJECT_DIR$/start/vendor/doctrine/deprecations" />
       <path value="$PROJECT_DIR$/start/vendor/doctrine/sql-formatter" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/deprecation-contracts" />
@@ -91,6 +86,10 @@
       <path value="$PROJECT_DIR$/start/vendor/symfony/event-dispatcher-contracts" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/service-contracts" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/proxy-manager-bridge" />
+      <path value="$PROJECT_DIR$/start/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/start/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/start/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/start/vendor/friendsofphp/proxy-manager-lts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1">
