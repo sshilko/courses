@@ -127,6 +127,9 @@
       <path value="$PROJECT_DIR$/start/vendor/nelmio/alice" />
       <path value="$PROJECT_DIR$/start/vendor/hautelook/alice-bundle" />
       <path value="$PROJECT_DIR$/start/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/start/vendor/symfony/monolog-bridge" />
+      <path value="$PROJECT_DIR$/start/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/start/vendor/monolog/monolog" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4">

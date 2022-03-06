@@ -22,6 +22,7 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.*|5.*",
         "symfony/http-client": "4.3.*|4.4.*",
+        "symfony/monolog-bundle": "^3.7",
         "symfony/property-access": "4.*|5.*",
         "symfony/property-info": "4.*|5.*",
         "symfony/proxy-manager-bridge": "4.*|5.*",

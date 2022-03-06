@@ -132,6 +132,9 @@
       <excludeFolder url="file://$MODULE_DIR$/start/vendor/nelmio/alice" />
       <excludeFolder url="file://$MODULE_DIR$/start/vendor/hautelook/alice-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/start/vendor/fakerphp/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/start/vendor/symfony/monolog-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/start/vendor/symfony/monolog-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/start/vendor/monolog/monolog" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

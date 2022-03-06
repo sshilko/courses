@@ -55,7 +55,11 @@ symfony console security:encode-password
 
 #update to symfony 5.4 due to `composer require alice --dev` dependency on 5.4
 
+#Hautelook\AliceBundle\HautelookAliceBundle
 composer require "alice:^2.7" --dev
+
+#monolog logger
+composer require logger
 
 
 ```
