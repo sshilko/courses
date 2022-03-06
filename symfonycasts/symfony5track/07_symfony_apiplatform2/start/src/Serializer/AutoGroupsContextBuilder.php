@@ -33,7 +33,10 @@ final class AutoGroupsContextBuilder implements SerializerContextBuilderInterfac
         $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);
 
         $context['groups'] = $context['groups'] ?? [];
-        $context['groups'] = array_merge($context['groups'], $this->addDefaultGroups($context, $normalization));
+
+        //comment out, redundant to AutoGroupsContextBuilder, it already adds default groups -->
+        //$context['groups'] = array_merge($context['groups'], $this->addDefaultGroups($context, $normalization));
+        //comment out, redundant to AutoGroupsContextBuilder, it already adds default groups <--
 
 //      $resourceClass = $context['resource_class'] ?? null;
 //      if ($resourceClass === User::class &&

@@ -89,7 +89,10 @@ documentation will be broken.
 To fix that we need Resource Metadata Factory: Dynamic ApiResource Options
 
 tof ix that need to make our own metadata factory, by decorating the default factory
+
 class AutoGroupResourceMetadataFactory implements ResourceMetadataFactoryInterface
+
+@see https://symfonycasts.com/screencast/api-platform-security/resource-metadata-factory#play
 
 this serializer need to be defined in services for Symfony to recognize it
 (we decorating api_platform.serializer.context_builder)
