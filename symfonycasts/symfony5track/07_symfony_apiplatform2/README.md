@@ -33,6 +33,11 @@ yarn encore dev --watch
 create docker-compose with mysql 5.7 and proper values,
 docker-compose up
 
+composer require test --dev
 
+#adjust db for test env
+
+symfony console --env=test doctrine:database:create
+symfony console --env=test doctrine:schema:create 
 
 ```
