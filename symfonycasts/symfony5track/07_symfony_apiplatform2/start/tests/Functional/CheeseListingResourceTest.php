@@ -64,12 +64,15 @@ class CheeseListingResourceTest extends CustomApitestCase
 
     public function testUpdateCheeseListing()
     {
-        $email = self::getRandomEmail();
+        $email1 = self::getRandomEmail();
+        $email2 = self::getRandomEmail();
         $client = self::createClient();
-        $user = $this->createUser($email, self::PASSWORD_PLAINTEXT);
+
+        $user1 = $this->createUser($email1, self::PASSWORD_PLAINTEXT);
+        $user2 = $this->createUser($email2, self::PASSWORD_PLAINTEXT);
 
         $cheeseListing = new CheeseListing('Block of blob');
-        $cheeseListing->setOwner($user);
+        $cheeseListing->setOwner($user1);
         $cheeseListing->setPrice(1000);
         $cheeseListing->setDescription(bin2hex(random_bytes(6)));
 
@@ -77,13 +80,20 @@ class CheeseListingResourceTest extends CustomApitestCase
         $em->persist($cheeseListing);
         $em->flush();
 
-        $this->login($client, $email, self::PASSWORD_PLAINTEXT);
+        $this->login($client, $email2, self::PASSWORD_PLAINTEXT);
 
         $client->request('PUT', '/api/cheeses/' . $cheeseListing->getId(), [
             'json' => ['title' => 'updatedtitle-' . time()]
         ]);
 
+        self::assertResponseStatusCodeSame(403);
+        self::assertStringContainsString('Only owner can edit cheese', $client->getResponse()->getContent(false));
+
+        $this->login($client, $email1, self::PASSWORD_PLAINTEXT);
+        $client->request('PUT', '/api/cheeses/' . $cheeseListing->getId(), [
+            'json' => ['title' => 'updatedtitle-' . time()]
+        ]);
         self::assertResponseStatusCodeSame(200);
-        
+
     }
 }
