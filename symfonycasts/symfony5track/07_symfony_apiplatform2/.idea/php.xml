@@ -122,9 +122,10 @@
       <path value="$PROJECT_DIR$/start/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/start/vendor/symfony/http-client" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.1">
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
   </component>
   <component name="PhpUnit">

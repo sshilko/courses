@@ -40,4 +40,17 @@ composer require test --dev
 symfony console --env=test doctrine:database:create
 symfony console --env=test doctrine:schema:create 
 
+#get all defined services and their aliases, i.e. @doctrine and @logger
+php bin/console debug:container
+
+
+php bin/phpunit
+
+#You cannot create the client used in functional tests if the BrowserKit and HttpClient components are not available. Try running "composer require --dev symfony/browser-kit symfony/http-client"
+composer require --dev symfony/http-client
+
+symfony console security:encode-password
+#foo
+#$argon2id$v=19$m=65536,t=4,p=1$wLzAcp6kcqrsYxKFXMYCXg$4o3519pdRmTqUMC7BIr25X4oX3R6/nccZfD21+DGNZI
+
 ```
