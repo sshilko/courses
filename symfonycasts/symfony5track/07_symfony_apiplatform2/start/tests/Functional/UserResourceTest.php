@@ -35,4 +35,49 @@ class UserResourceTest extends CustomApitestCase
         $this->login($client, $email1, $passw1);
         self::assertResponseStatusCodeSame(204);
     }
+
+    public function testUpdateUser()
+    {
+        $client = self::createClient();
+
+        $email1 = self::getRandomEmail();
+        $passw1 = self::PASSWORD_PLAIN_FOO;
+
+        $user = $this->createUserAndLogin($client, $email1, $passw1);
+
+        $client->request('PUT', '/api/users/' . $user->getId(), [
+            'json' => ['username' => 'newusername']
+        ]);
+
+        self::assertResponseIsSuccessful();
+
+        self::assertJsonContains(['username' => 'newusername']);
+    }
+
+    public function testGetUser()
+    {
+        $client = self::createClient();
+        $email1 = self::getRandomEmail();
+        $passw1 = self::PASSWORD_PLAIN_FOO;
+        $user = $this->createUserAndLogin($client, $email1, $passw1);
+
+        $user->setPhoneNumber('555.111.4567');
+        $em = $this->getEntityManager();
+        $em->flush();
+
+        $client->request('GET', '/api/users/' . $user->getId());
+
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains([
+            'email' => $email1
+        ]);
+
+
+        $data = $client->getResponse()->toArray();
+        $this->assertArrayNotHasKey('phoneNumber', $data);
+
+
+
+
+    }
 }
