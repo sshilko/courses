@@ -146,6 +146,19 @@ user:collection:read
  * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
  */
  
+ Fix cache of metadata factory by setting priority
+ 
+     App\ApiPlatform\AutoGroupResourceMetadataFactory:
+        decorates: 'api_platform.metadata.resource.metadata_factory'
+        arguments: [ '@App\ApiPlatform\AutoGroupResourceMetadataFactory.inner' ]
+        decoration_priority: -20
+        
+        -20 AutoGroupResourceMetadataFactory
+        -10 CachedResourceMetadataFactory
+          0 TheCoreResourceMetadataFactory
+          
+          
+        
  
 
 ```
