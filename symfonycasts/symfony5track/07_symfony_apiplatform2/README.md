@@ -74,4 +74,12 @@ Advanced: security_post_denormalize to run security after deserialization,
 then object variable is updated object
 
 
+AuthorizationCheckerInterface is same, just exposes isGranted
+otherwise can use Security for isGranted
+
+#AuthorizationCheckerInterface $authorizationChecker, Security $security
+$this->authorizationChecker->isGranted('ROLE_ADMIN') &&
+$this->security->isGranted('ROLE_ADMIN') &&
+
+
 ```

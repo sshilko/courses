@@ -88,12 +88,12 @@ class UserResourceTest extends CustomApitestCase
 
         self::assertResponseIsSuccessful();
 
-        $client->getResponse()->toArray();
+        $client->request('GET', '/api/users/' . $user->getId());
 
         self::assertResponseIsSuccessful();
 
         self::assertJsonContains([
-            'phonenumber' => $phone1,
+            'phoneNumber' => $phone1,
         ]);
 
     }
