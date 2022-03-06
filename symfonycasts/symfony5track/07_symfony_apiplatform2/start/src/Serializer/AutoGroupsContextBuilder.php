@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Security;
 
-final class AdminGroupsContextBuilder implements SerializerContextBuilderInterface
+final class AutoGroupsContextBuilder implements SerializerContextBuilderInterface
 {
     /**
      * Globally adds admin:read and admin:write to all (de)normalization serializations
@@ -32,10 +32,12 @@ final class AdminGroupsContextBuilder implements SerializerContextBuilderInterfa
     {
         $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);
 
+        $context['groups'] = $context['groups'] ?? [];
+        $context['groups'] = array_merge($context['groups'], $this->addDefaultGroups($context, $normalization));
+
 //      $resourceClass = $context['resource_class'] ?? null;
 //      if ($resourceClass === User::class &&
-        if (isset($context['groups']) &&
-            //the same -->
+        if (//the same -->
             $this->authorizationChecker->isGranted('ROLE_ADMIN') &&
             $this->security->isGranted('ROLE_ADMIN')
             //the same <--
@@ -44,6 +46,33 @@ final class AdminGroupsContextBuilder implements SerializerContextBuilderInterfa
                 : self::SERIALIZATION_CONTEXT_GROUP_ADMIN_WRITE;
         }
 
+        $context['groups'] = array_unique($context['groups']);
+
         return $context;
     }
+
+    private function addDefaultGroups(array $context, bool $normalization)
+    {
+        $resourceClass = $context['resource_class'] ?? null;
+        if (!$resourceClass) {
+            return null;
+        }
+        $shortName = (new \ReflectionClass($resourceClass))->getShortName();
+        $classAlias = strtolower(preg_replace('/[A-Z]/', '_\\0', lcfirst($shortName)));
+        $readOrWrite = $normalization ? 'read' : 'write';
+        $itemOrCollection = $context['operation_type'];
+        $operationName = $itemOrCollection === 'item' ? $context['item_operation_name'] : $context['collection_operation_name'];
+        return [
+            // {class}:{read/write}
+            // e.g. user:read
+            sprintf('%s:%s', $classAlias, $readOrWrite),
+            // {class}:{item/collection}:{read/write}
+            // e.g. user:collection:read
+            sprintf('%s:%s:%s', $classAlias, $itemOrCollection, $readOrWrite),
+            // {class}:{item/collection}:{operationName}
+            // e.g. user:collection:get
+            sprintf('%s:%s:%s', $classAlias, $itemOrCollection, $operationName),
+        ];
+    }
+
 }

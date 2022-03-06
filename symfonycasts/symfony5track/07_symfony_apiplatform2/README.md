@@ -81,5 +81,68 @@ otherwise can use Security for isGranted
 $this->authorizationChecker->isGranted('ROLE_ADMIN') &&
 $this->security->isGranted('ROLE_ADMIN') &&
 
+Used AutoGroupsContextBuilder adds dynamicly groups and adds bunch of pre-made groups
+if we follow naming convention like.
+
+But those dynamic groups do not show on documentation by default, they will work, but
+documentation will be broken.
+To fix that we need Resource Metadata Factory: Dynamic ApiResource Options
+
+tof ix that need to make our own metadata factory, by decorating the default factory
+class AutoGroupResourceMetadataFactory implements ResourceMetadataFactoryInterface
+
+this serializer need to be defined in services for Symfony to recognize it
+(we decorating api_platform.serializer.context_builder)
+
+    App\Serializer\AutoGroupsContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\AutoGroupsContextBuilder.inner' ]
+        autoconfigure: false
+
+user:write
+user:read
+user:item:read
+user:collection:read
+...
+
+
+
+/**
+ * @ApiResource(
+ *     collectionOperations={
+ *     "get",
+ *     "post" = {"security" = "is_granted('ROLE_USER')"}
+ *     },
+ *     itemOperations={
+ *          "get"={
+ *              "normalization_context"={"groups"={"cheese_listing:read", "cheese_listing:item:get"}},
+ *          },
+ *          "put" = {
+ *              "security" = "is_granted('ALLOW_CHEESELISTING_EDIT', object)",
+ *              "security_message" = "Only owner can edit cheese: Simplified can be as is_granted('ROLE_USER') and object.getOwner() == user, but instead lets try voter"
+ *          },
+ *          "delete" = {"security" = "is_granted('ROLE_ADMIN')"}
+ *     },
+ *     shortName="cheeses",
+ *     normalizationContext={"groups"={"cheese_listing:read"}, "swagger_definition_name"="Read"},
+ *     denormalizationContext={"groups"={"cheese_listing:write"}, "swagger_definition_name"="Write"},
+ *     attributes={
+ *          "pagination_items_per_page"=10,
+ *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
+ *     }
+ * )
+ * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "title": "partial",
+ *     "description": "partial",
+ *     "owner": "exact",
+ *     "owner.username": "partial"
+ * })
+ * @ApiFilter(RangeFilter::class, properties={"price"})
+ * @ApiFilter(PropertyFilter::class)
+ * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ */
+ 
+ 
 
 ```

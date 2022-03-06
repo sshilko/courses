@@ -24,10 +24,13 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Serializer\AdminGroupsContextBuilder:
+    App\Serializer\AutoGroupsContextBuilder:
         decorates: 'api_platform.serializer.context_builder'
-        arguments: [ '@App\Serializer\AdminGroupsContextBuilder.inner' ]
-        autoconfigure: false
+        arguments: [ '@App\Serializer\AutoGroupsContextBuilder.inner' ]
+
+    App\ApiPlatform\AutoGroupResourceMetadataFactory:
+        decorates: 'api_platform.metadata.resource.metadata_factory'
+        arguments: [ '@App\ApiPlatform\AutoGroupResourceMetadataFactory.inner' ]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

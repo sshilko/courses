@@ -46,12 +46,20 @@ class UserResourceTest extends CustomApitestCase
         $user = $this->createUserAndLogin($client, $email1, $passw1);
 
         $client->request('PUT', '/api/users/' . $user->getId(), [
-            'json' => ['username' => 'newusername']
+            'json' => [
+                'username' => 'newusername',
+                'roles' => ['ROLE_ADMIN'], //will be ignored as not exposed
+            ]
         ]);
 
         self::assertResponseIsSuccessful();
 
         self::assertJsonContains(['username' => 'newusername']);
+
+        $em = $this->getEntityManager();
+        /** @var User $user */
+        $user = $em->getRepository(User::class)->find($user->getId());
+        $this->assertEquals(['ROLE_USER'], $user->getRoles());
     }
 
     public function testGetUser()
