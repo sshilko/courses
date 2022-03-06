@@ -65,43 +65,62 @@ class UserResourceTest extends CustomApitestCase
     public function testGetUser()
     {
         $client = self::createClient();
+
+        $email0 = self::getRandomEmail();
+        $passw0 = self::PASSWORD_PLAIN_FOO;
+        $phone0 = '666.111.' . time();
+        $user0 = $this->createUserAndLogin($client, $email0, $passw0);
+        $user0->setPhoneNumber($phone0);
+
+
         $email1 = self::getRandomEmail();
         $passw1 = self::PASSWORD_PLAIN_FOO;
         $phone1 = '555.111.' . time();
-        $user = $this->createUserAndLogin($client, $email1, $passw1);
+        $user1 = $this->createUserAndLogin($client, $email1, $passw1);
+        $user1->setPhoneNumber($phone1);
 
-        $user->setPhoneNumber($phone1);
         $em = $this->getEntityManager();
         $em->flush();
 
-        $client->request('GET', '/api/users/' . $user->getId());
-
+        /**
+         * Test not having access to other people's phone number
+         */
+        $client->request('GET', '/api/users/' . $user0->getId());
         self::assertResponseIsSuccessful();
         self::assertJsonContains([
-            'email' => $email1
+            'email' => $email0
         ]);
-
-
         $data = $client->getResponse()->toArray();
         $this->assertArrayNotHasKey('phoneNumber', $data);
 
+        /**
+         * Test having access to my owner:read phone number
+         */
+        $client->request('GET', '/api/users/' . $user1->getId());
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains([
+                                     'email' => $email1
+                                 ]);
+        $data = $client->getResponse()->toArray();
+        $this->assertArrayHasKey('phoneNumber', $data);
+
+
+        /**
+         * Test admin:read
+         * Set uset to admin, then access other people's phone
+         */
         //refresh the user, because EntityManager loses it's state and track of
         //of entities after client->request
-        $user = $em->getRepository(User::class)->find($user->getId());
-        $user->setRoles(['ROLE_ADMIN']);
+        $user1 = $em->getRepository(User::class)->find($user1->getId());
+        $user1->setRoles(['ROLE_ADMIN']);
         $em->flush();
-
         #force updater roles for security system
         $this->login($client, $email1, $passw1);
-
         self::assertResponseIsSuccessful();
-
-        $client->request('GET', '/api/users/' . $user->getId());
-
+        $client->request('GET', '/api/users/' . $user0->getId());
         self::assertResponseIsSuccessful();
-
         self::assertJsonContains([
-            'phoneNumber' => $phone1,
+            'phoneNumber' => $phone0,
         ]);
 
     }
