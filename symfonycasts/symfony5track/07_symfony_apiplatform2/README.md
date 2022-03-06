@@ -61,5 +61,17 @@ composer require "alice:^2.7" --dev
 #monolog logger
 composer require logger
 
+#api-platform-2.4
+1 Deserializes the json and updates the CheeseListing onject
+>>>BUG with security/ownership possible in put, use "previous_object" before json is prossed
+2. Applies access_control security
+3. Executes validation rules
+
+#api-platform-2.5+
+1.use "security" option instead of "access_control"
+"security" runs before object is updated from POST data.
+Advanced: security_post_denormalize to run security after deserialization,
+then object variable is updated object
+
 
 ```
