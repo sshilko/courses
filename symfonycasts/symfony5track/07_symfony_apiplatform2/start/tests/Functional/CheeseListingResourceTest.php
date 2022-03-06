@@ -3,12 +3,17 @@
 namespace App\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use App\Entity\CheeseListing;
 use App\Entity\User;
+use App\Test\CustomApitestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 
-class CheeseListingResourceTest extends ApiTestCase
+class CheeseListingResourceTest extends CustomApitestCase
 {
+    private const PASSWORD_PLAINTEXT = 'foo';
+    #private const PASSWORD_HASHED = '$argon2id$v=19$m=65536,t=4,p=1$9wWzG3E8mscDs2WRIdy66A$japO4VgQrQDGyZ2J4Cu3WZ4GRFnqgmrOHz6hgCkziLo';
+
     use ReloadDatabaseTrait;
 
 //    private EntityManagerInterface $em;
@@ -33,31 +38,52 @@ class CheeseListingResourceTest extends ApiTestCase
         $client = self::createClient();
 
         $client->request('POST', '/api/cheeses', [
-            'headers' => ['Content-Type' => 'application/json'],
+           #'headers' => ['Content-Type' => 'application/json'],
             'json' => []
         ]);
         self::assertResponseStatusCodeSame(401);
 
-        $user = new User();
-        $user->setEmail('a@a9.com');
-        $user->setUsername('iamaatadotcom8');
-        #foo
-        $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$9wWzG3E8mscDs2WRIdy66A$japO4VgQrQDGyZ2J4Cu3WZ4GRFnqgmrOHz6hgCkziLo');
+        $email = bin2hex(random_bytes(4)) . '@' . bin2hex(random_bytes(4)) . '.com';
+//        $this->createUser(
+//            $email,
+//            self::PASSWORD_PLAINTEXT
+//        );
+//
+//        $this->login($client, $email, self::PASSWORD_PLAINTEXT);
 
-//        $this->em->persist($user);
-//        $this->em->flush();
 
-        $kernel = self::bootKernel();
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
-        $em->persist($user);
-        $em->flush();
-
-        $client->request('POST', '/login', [
-            'headers' => ['Content-Type' => 'application/json'],
-            'json' => ['email' => 'a@a9.com', 'password' => 'foo']
-        ]);
-
+        $this->createUserAndLogin($client, $email, self::PASSWORD_PLAINTEXT);
         self::assertResponseStatusCodeSame(204);
+
+        $client->request('POST', '/api/cheeses', [
+           #'headers' => ['Content-Type' => 'application/json'],
+            'json' => []
+        ]);
+        self::assertResponseStatusCodeSame(422);
     }
 
+    public function testUpdateCheeseListing()
+    {
+        $email = self::getRandomEmail();
+        $client = self::createClient();
+        $user = $this->createUser($email, self::PASSWORD_PLAINTEXT);
+
+        $cheeseListing = new CheeseListing('Block of blob');
+        $cheeseListing->setOwner($user);
+        $cheeseListing->setPrice(1000);
+        $cheeseListing->setDescription(bin2hex(random_bytes(6)));
+
+        $em = $this->getEntityManager();
+        $em->persist($cheeseListing);
+        $em->flush();
+
+        $this->login($client, $email, self::PASSWORD_PLAINTEXT);
+
+        $client->request('PUT', '/api/cheeses/' . $cheeseListing->getId(), [
+            'json' => ['title' => 'updatedtitle-' . time()]
+        ]);
+
+        self::assertResponseStatusCodeSame(200);
+        
+    }
 }
