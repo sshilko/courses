@@ -72,9 +72,6 @@
       <path value="$PROJECT_DIR$/start/vendor/symfony/webpack-encore-bundle" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/doctrine-bridge" />
       <path value="$PROJECT_DIR$/start/vendor/doctrine/orm" />
-      <path value="$PROJECT_DIR$/start/vendor/symfony/inflector" />
-      <path value="$PROJECT_DIR$/start/vendor/symfony/polyfill-intl-idn" />
-      <path value="$PROJECT_DIR$/start/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/cache-contracts" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/translation-contracts" />
@@ -123,6 +120,13 @@
       <path value="$PROJECT_DIR$/start/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/start/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/start/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/start/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/start/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/start/vendor/theofidry/alice-data-fixtures" />
+      <path value="$PROJECT_DIR$/start/vendor/nelmio/alice" />
+      <path value="$PROJECT_DIR$/start/vendor/hautelook/alice-bundle" />
+      <path value="$PROJECT_DIR$/start/vendor/fakerphp/faker" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4">

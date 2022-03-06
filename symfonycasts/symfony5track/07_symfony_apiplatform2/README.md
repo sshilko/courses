@@ -53,4 +53,9 @@ symfony console security:encode-password
 #foo
 #$argon2id$v=19$m=65536,t=4,p=1$wLzAcp6kcqrsYxKFXMYCXg$4o3519pdRmTqUMC7BIr25X4oX3R6/nccZfD21+DGNZI
 
+#update to symfony 5.4 due to `composer require alice --dev` dependency on 5.4
+
+composer require "alice:^2.7" --dev
+
+
 ```
