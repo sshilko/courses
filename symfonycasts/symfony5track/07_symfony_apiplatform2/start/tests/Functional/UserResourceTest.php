@@ -59,9 +59,10 @@ class UserResourceTest extends CustomApitestCase
         $client = self::createClient();
         $email1 = self::getRandomEmail();
         $passw1 = self::PASSWORD_PLAIN_FOO;
+        $phone1 = '555.111.' . time();
         $user = $this->createUserAndLogin($client, $email1, $passw1);
 
-        $user->setPhoneNumber('555.111.4567');
+        $user->setPhoneNumber($phone1);
         $em = $this->getEntityManager();
         $em->flush();
 
@@ -75,6 +76,26 @@ class UserResourceTest extends CustomApitestCase
 
         $data = $client->getResponse()->toArray();
         $this->assertArrayNotHasKey('phoneNumber', $data);
+
+        //refresh the user, because EntityManager loses it's state and track of
+        //of entities after client->request
+        $user = $em->getRepository(User::class)->find($user->getId());
+        $user->setRoles(['ROLE_ADMIN']);
+        $em->flush();
+
+        #force updater roles for security system
+        $this->login($client, $email1, $passw1);
+
+        self::assertResponseIsSuccessful();
+
+        $client->getResponse()->toArray();
+
+        self::assertResponseIsSuccessful();
+
+        self::assertJsonContains([
+                                     'phonenumber' => $phone1
+                                 ]);
+
 
 
 
