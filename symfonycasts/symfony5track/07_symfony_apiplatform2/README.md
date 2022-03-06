@@ -157,6 +157,10 @@ user:collection:read
         -10 CachedResourceMetadataFactory
           0 TheCoreResourceMetadataFactory
           
+AutoGroupsContextBuilder is limited to CLASS basis, not instance/object
+So i.e. EXPOSING specific field of my own user profile, is not possible with groups.
+Setting security/permissions IS possible for whole operation, but not exposing/hiding single
+properties based on instance object.          
           
         
  
