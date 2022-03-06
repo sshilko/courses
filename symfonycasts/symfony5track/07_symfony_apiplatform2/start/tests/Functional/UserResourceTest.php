@@ -93,12 +93,8 @@ class UserResourceTest extends CustomApitestCase
         self::assertResponseIsSuccessful();
 
         self::assertJsonContains([
-                                     'phonenumber' => $phone1
-                                 ]);
-
-
-
-
+            'phonenumber' => $phone1,
+        ]);
 
     }
 }
