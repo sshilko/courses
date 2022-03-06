@@ -11,7 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
+
+// collectionOperation."post" = {"security" = "is_granted('ROLE_USER') or is_granted('PUBLIC_ACCESS')"}
 
 /**
  * @ApiResource(
@@ -19,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         "get" = {
  *                  "security" = "is_granted('ROLE_USER')"
  *         },
- *         "post" = {"security" = "is_granted('ROLE_USER') or is_granted('PUBLIC_ACCESS')"}
+ *         "post"
  *     },
  *     itemOperations={
  *          "get"={
@@ -67,6 +70,12 @@ class User implements UserInterface
      * @Groups({"user:write"})
      */
     private $password;
+
+    /**
+     * @var @Groups({"user:write"})
+     * @SerializedName("password")
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -162,7 +171,7 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function setUsername(string $username): self
@@ -199,7 +208,17 @@ class User implements UserInterface
                 $cheeseListing->setOwner(null);
             }
         }
+        return $this;
+    }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
         return $this;
     }
 }

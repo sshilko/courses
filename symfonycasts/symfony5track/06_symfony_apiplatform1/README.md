@@ -42,4 +42,29 @@ composer require profiler --dev
 
 composer require nesbot/carbon
 
+    /**
+     * How long ago something was added
+     *
+     * @Groups({"cheeze_listing:read"})
+     */
+    public function getCreatedAtAgo(): string
+    {
+        return Carbon::instance($this->getCreatedAt())->diffForHumans();
+    }
+
+    /**
+     * Just text please
+     *
+     * @Groups({"cheeze_listing:write", "user:write"})
+     * @SerializedName("description")
+     */
+    public function setTextDescription(string $description): self
+    {
+        $this->description = nl2br($description);
+
+        return $this;
+    }
+
+    
+
 ```

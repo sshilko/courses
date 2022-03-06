@@ -42,7 +42,6 @@ class CheeseListVoterTest extends KernelTestCase
 
     public function testSomething(): void
     {
-
         self::bootKernel();
 
         $container = static::$container;
@@ -87,6 +86,7 @@ class CheeseListVoterTest extends KernelTestCase
         /**
          * TODO create mocks for TokenInterface::class or UserNamePasswordToken etc.
          * then use those for checking security and roles etc.
+         * @see https://github.com/symfony/symfony/blob/6.1/src/Symfony/Component/Security/Core/Tests/SecurityTest.php
          */
 
     }
