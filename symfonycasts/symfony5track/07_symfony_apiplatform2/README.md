@@ -162,7 +162,16 @@ So i.e. EXPOSING specific field of my own user profile, is not possible with gro
 Setting security/permissions IS possible for whole operation, but not exposing/hiding single
 properties based on instance object.          
           
-        
+Allowing on not allowing writing field value, based on context/current-user
+is done with Validators.
+I.e. User API allows to create cheeze via users-api PUT endpoint,
+but we must validate that cheeze data.owner it set to the user that makes
+api call created and user id is same (should no add cheeze to other users accounts)
+And should allow admins to do all that btw.
+
+symfony coneole make:validator
+
+
  
 
 ```

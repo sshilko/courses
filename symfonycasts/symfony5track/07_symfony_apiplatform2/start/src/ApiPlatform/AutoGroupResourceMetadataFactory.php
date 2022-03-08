@@ -43,6 +43,9 @@ class AutoGroupResourceMetadataFactory implements ResourceMetadataFactoryInterfa
 
     private function updateContextOnOperations(array $operations, string $shortName, bool $isItem)
     {
+        /**
+         * $operationName = [get, put, delete, post]
+         */
         foreach ($operations as $operationName => $operationOptions) {
             $operationOptions['normalization_context'] = $operationOptions['normalization_context'] ?? [];
             $operationOptions['normalization_context']['groups'] = $operationOptions['normalization_context']['groups'] ?? [];
@@ -68,12 +71,15 @@ class AutoGroupResourceMetadataFactory implements ResourceMetadataFactoryInterfa
         return [
             // {shortName}:{read/write}
             // e.g. user:read
+            //      user:write
             sprintf('%s:%s', $shortName, $readOrWrite),
             // {shortName}:{item/collection}:{read/write}
-            // e.g. user:collection:read
+            // e.g. user:collection:read user:collection:write
+            //      user:item:read       user:item:write
             sprintf('%s:%s:%s', $shortName, $itemOrCollection, $readOrWrite),
             // {shortName}:{item/collection}:{operationName}
-            // e.g. user:collection:get
+            // user:collection:get user:collection:post user:collection:put user:collection:delete
+            // user:item:get       user:item:post       user:item:put       user:item:delete
             sprintf('%s:%s:%s', $shortName, $itemOrCollection, $operationName),
         ];
     }

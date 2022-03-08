@@ -62,6 +62,49 @@ class CheeseListingResourceTest extends CustomApitestCase
         self::assertResponseStatusCodeSame(422);
     }
 
+    public function testCreateCheeseListing2(): void
+    {
+        $client = self::createClient();
+
+        $email1 = self::getRandomEmail();
+        $email2 = self::getRandomEmail();
+
+        $user1 = $this->createUser($email1, self::PASSWORD_PLAINTEXT);
+        $user2 = $this->createUser($email2, self::PASSWORD_PLAINTEXT);
+
+        $this->login($client, $email1, self::PASSWORD_PLAINTEXT);
+        self::assertResponseIsSuccessful();
+
+        $cheezyData = [
+            'title' => 'Mystery cheeze ' . time(),
+            'description' => 'Fresh ' . time(),
+            'price' => random_int(100, 5000)
+        ];
+
+        $client->request('POST', '/api/cheeses', [
+            'json' => $cheezyData
+        ]);
+        self::assertResponseStatusCodeSame(422);
+
+        /**
+         * Trying to create cheeze for non-logged-in user (other user)
+         * should still work for admin
+         */
+        $client->request('POST', '/api/cheeses', [
+            'json' => $cheezyData + [
+                'owner' => '/api/users/' . $user2->getId()
+                ]
+        ]);
+        self::assertResponseStatusCodeSame(422, 'Passing owner != self');
+
+        $client->request('POST', '/api/cheeses', [
+            'json' => $cheezyData + [
+                    'owner' => '/api/users/' . $user1->getId()
+                ]
+        ]);
+        self::assertResponseStatusCodeSame(201, 'Passing owner == self');
+    }
+
     public function testUpdateCheeseListing()
     {
         $email1 = self::getRandomEmail();
