@@ -84,7 +84,8 @@ class CheeseListingResourceTest extends CustomApitestCase
         $client->request('POST', '/api/cheeses', [
             'json' => $cheezyData
         ]);
-        self::assertResponseStatusCodeSame(422);
+
+        self::assertResponseStatusCodeSame(201, 'Auto inserted owner by entity listener');
 
         /**
          * Trying to create cheeze for non-logged-in user (other user)
