@@ -119,6 +119,7 @@ class CheeseListingResourceTest extends CustomApitestCase
         $cheeseListing->setOwner($user1);
         $cheeseListing->setPrice(1000);
         $cheeseListing->setDescription(bin2hex(random_bytes(6)));
+        $cheeseListing->setIsPublished(true);
 
         $em = $this->getEntityManager();
         $em->persist($cheeseListing);
@@ -183,7 +184,7 @@ class CheeseListingResourceTest extends CustomApitestCase
         $client = self::createClient();
 
         $email1 = self::getRandomEmail();
-        $user = $this->createUser($email1, self::PASSWORD_PLAINTEXT);
+        $user = $this->createUserAndLogin($client, $email1, self::PASSWORD_PLAINTEXT);
 
         $description = 'cheese-' . microtime();
 
@@ -191,7 +192,7 @@ class CheeseListingResourceTest extends CustomApitestCase
         $cheeseListing1->setOwner($user);
         $cheeseListing1->setPrice(1000);
         $cheeseListing1->setDescription($description);
-        $cheeseListing1->setIsPublished(true); #default
+        $cheeseListing1->setIsPublished(true);
 
         $cheeseListing2 = new CheeseListing('cheese2');
         $cheeseListing2->setOwner($user);
@@ -212,6 +213,19 @@ class CheeseListingResourceTest extends CustomApitestCase
 
         $client->request('GET', '/api/cheeses/' . $cheeseListing2->getId());
         self::assertResponseStatusCodeSame(404);
+
+
+        $em = $this->getEntityManager();
+        /** @var CheeseListing $cheeseListing1 */
+        $cheeseListing1 = $em->getRepository(CheeseListing::class)->find($cheeseListing1->getId());
+        $cheeseListing1->setIsPublished(false);
+        $em->persist($cheeseListing1);
+        $em->flush();
+
+        $client->request('GET', '/api/users/' . $user->getId());
+        $data = $client->getResponse()->toArray();
+
+        $this->assertEmpty($data['cheeseListings']);
 
 
     }
