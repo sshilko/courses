@@ -13,6 +13,18 @@ ask!
 
 ```
 
+We added one type of API authentication - 
+with a plan to discuss other types more in a future tutorial -
+ and then customized access in every possible way I could think of:
+  
+* preventing access on an operation-by-operation basis,
+* voters for more complex control,
+* hiding fields based on the user,
+* adding custom fields based on the user,
+* validating data... again...
+  - based on who is logged in 
+* and even controlling database queries based on security.
+
 composer install
 composer update
 
