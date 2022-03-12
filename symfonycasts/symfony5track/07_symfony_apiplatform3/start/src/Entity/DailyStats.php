@@ -12,7 +12,7 @@ use App\ApiPlatform\DailyStatsDataFilter;
 
 /**
  *
- * @ApiFilter(DailyStatsDataFilter::class)
+ * @ApiFilter(DailyStatsDataFilter::class, arguments={"throwmyErrorOnInvalid"=true})
  * @ApiResource(
  *     paginationItemsPerPage=7,
  *     normalizationContext={"groups"={"daily-stats:read"}},

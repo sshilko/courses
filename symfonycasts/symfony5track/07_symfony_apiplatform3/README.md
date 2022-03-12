@@ -147,7 +147,17 @@ use ApiPlatform\Core\DataProvider\Pagination;
  openapi  / swagger / jsonld / graphql
  with some options supported and some not
  documentation somewhere works somewhere not
+
+BadReqyestHttoException 400 anytime
+
+@ApiFilter annotation makes api-platform
+ register a service in container, so autowiring is available.
+ mayb require overdiding __constructor
  
+ using output Dto will transform the original entity tclass to output class
+ THEN output class is serialized
+   
  
  
 ```
+

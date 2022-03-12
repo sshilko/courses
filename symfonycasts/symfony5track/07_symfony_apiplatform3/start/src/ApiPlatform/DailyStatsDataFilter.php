@@ -4,11 +4,17 @@ namespace App\ApiPlatform;
 
 use ApiPlatform\Core\Serializer\Filter\FilterInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class DailyStatsDataFilter implements FilterInterface
 {
-
     public const FROM_FILTER_CONTEXT = 'daily_stats_from';
+    private bool $throwmyErrorOnInvalid;
+
+    public function __construct(bool $throwmyErrorOnInvalid = false)
+    {
+        $this->throwmyErrorOnInvalid = $throwmyErrorOnInvalid;
+    }
 
     public function apply(Request $request, bool $normalization, array $attributes, array &$context)
     {
@@ -22,6 +28,12 @@ class DailyStatsDataFilter implements FilterInterface
             $fromDate = $fromDate->setTime(0, 0, 0);
 
             $context[self::FROM_FILTER_CONTEXT] = $fromDate;
+        } else {
+            if ($this->throwmyErrorOnInvalid) {
+                throw new BadRequestHttpException('Invalid date from format');
+            }
+
+            //bad date
         }
     }
 
