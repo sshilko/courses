@@ -60,5 +60,35 @@ DB reset with foundry bundle and https://github.com/dmaicher/doctrine-test-bundl
  has also property previous_object
  
  
+ DataProvider for API-Platform, default one, need to decarate, implement
+ 
+ ContextAwareCollectionDataProviderInterface, <<---- for collection
+  
+ RestrictedDataProviderInterface, 
+ 
+ DenormalizedIdentifiersAwareItemDataProviderInterface <---- for item
+
+https://api-platform.com/docs/core/serialization/
+
+? CLIENT-PROCESS -> DESERIALIZATION -> DATA_PERSISTER -> SERVER
+? SERVER-PROCESS -> DATA_PROVIDER -> SERIALIZATION => CLIENT
+
+To mutate the application states during POST, PUT, PATCH or DELETE operations, 
+API Platform uses classes called data persisters. 
+Data persisters receive an instance of the class marked as an API resource.
+This instance contains data submitted by the client during the deserialization process.
+
+CUSTOM FIELD SOLUTIONS
+---------------------
+
+1. Add a non-persisted field to entity (DATA_PERSISTERS, DATA_PROVIDERS), 
+     Pure PlatformAPI solution 
+   - if most fields come from db/entity, an okay option
+
+2. Create a custom API resource class thats not an entity
+
+3. Create an output DTO
+
+
  
 ```

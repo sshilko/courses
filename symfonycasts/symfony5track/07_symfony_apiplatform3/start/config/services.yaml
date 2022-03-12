@@ -46,6 +46,10 @@ services:
         bind:
             $decoratedDataPersister: '@api_platform.doctrine.orm.data_persister'
 
+    #see symfony console debug:container api_platform.doctrine.orm.default
+    #passing original data providers, and only decorating them (adding some properties)
     App\DataProvider\UserDataProvider:
         bind:
             $collectionData: '@api_platform.doctrine.orm.default.collection_data_provider'
+            $itemDataProvider: '@api_platform.doctrine.orm.default.item_data_provider'
+
