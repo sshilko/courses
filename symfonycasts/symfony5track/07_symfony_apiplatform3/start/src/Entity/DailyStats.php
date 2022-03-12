@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Action\NotFoundAction;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use App\ApiPlatform\DailyStatsDataFilter;
 
 /**
  *
+ * @ApiFilter(DailyStatsDataFilter::class)
  * @ApiResource(
  *     paginationItemsPerPage=7,
  *     normalizationContext={"groups"={"daily-stats:read"}},
