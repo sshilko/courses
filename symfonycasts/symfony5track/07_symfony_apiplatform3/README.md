@@ -161,6 +161,15 @@ BadReqyestHttoException 400 anytime
 DTO: can have different DTO's on different operations
    
 composer require symfony/debug-bundle 
+
+INPUT DTO:
+1. desirialize into DTO object
+2. we transform DTO-INPUT object into real object
+3. normal data persister saves things
+
+UUID's
+
+composer require ramsey/uuid-doctrine
  
 ```
 

@@ -11,11 +11,15 @@ class CheeseListingInput
 {
 
     /**
+     * @var string
+     *
      * @Groups({"cheese:write", "user:write"})
      */
     public $title;
 
     /**
+     * @var int
+     *
      * @Groups({"cheese:write", "user:write"})
      */
     public $price;
@@ -28,6 +32,8 @@ class CheeseListingInput
     public $owner;
 
     /**
+     * @var bool
+     *
      * @Groups({"cheese:write"})
      */
     public $isPublished = false;
