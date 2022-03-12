@@ -130,6 +130,11 @@ class DailyStats
 
 }
 
+@ApiProperty(readableLink=true) --- force not to expand IRI, in collection
+@ApiProperty(readableLink=false) --- force expand collection in api response
+
+use ApiPlatform\Core\DataProvider\Pagination;
+        list($page, $offset, $limit) = $this->pagination->getPagination($resourceClass, $operationName);
 
  
 ```

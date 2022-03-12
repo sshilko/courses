@@ -6,19 +6,14 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Action\NotFoundAction;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  *
  * @ApiResource(
+ *     paginationItemsPerPage=7,
  *     normalizationContext={"groups"={"daily-stats:read"}},
- *     itemOperations={
- *         "get"={
- *             "method"="GET",
- *             "controller"=NotFoundAction::class,
- *             "read"=false,
- *             "output"=false,
- *         },
- *     },
+ *     itemOperations={"get"},
  *     collectionOperations={"get"}
  * )
  */
@@ -27,7 +22,7 @@ class DailyStats
     /**
      * @Groups({"daily-stats:read"})
      */
-    public \DateTimeInterface $date;
+    public $date;
 
     /**
      * @Groups({"daily-stats:read"})
