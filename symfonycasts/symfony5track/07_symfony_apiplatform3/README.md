@@ -90,5 +90,46 @@ CUSTOM FIELD SOLUTIONS
 3. Create an output DTO
 
 
+https://api-platform.com/docs/core/events/
+RequestEvent ->getRequest()->attributes->get('data');
+
+Event system is not used in Api-Platform GraphQL support
+
+custom resource
+
+
+/**
+ *
+ * @ApiResource(
+ *     itemOperations={
+ *         "get"={
+ *             "method"="GET",
+ *             "controller"=NotFoundAction::class,
+ *             "read"=false,
+ *             "output"=false,
+ *         },
+ *     },
+ *     collectionOperations={"get"}
+ * )
+ */
+class DailyStats
+{
+    /**
+     * @ApiProperty(identifier=true)
+     */
+    public \DateTimeImmutable $date;
+
+    public int $totalVisitors;
+
+    public array $mostPopularListings;
+
+    public function getDate(): string
+    {
+        return $this->date->format('Y-m-d');
+    }
+
+}
+
+
  
 ```

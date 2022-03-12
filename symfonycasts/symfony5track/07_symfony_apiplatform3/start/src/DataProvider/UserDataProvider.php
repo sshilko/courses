@@ -35,7 +35,7 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, R
             /**
              * Add custom isMe field, returned on collection call
              */
-            $user->setIsMe($currentUser === $user);
+            //$user->setIsMe($currentUser === $user);
         }
 
         return $users;
@@ -58,7 +58,7 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, R
         /**
          * Add custom isMe field, returned on item
          */
-        $item->setIsMe($this->security->getUser() === $item);
+        //$item->setIsMe($this->security->getUser() === $item);
 
         return $item;
     }
