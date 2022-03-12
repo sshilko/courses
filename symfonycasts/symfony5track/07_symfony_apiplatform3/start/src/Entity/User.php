@@ -93,6 +93,13 @@ class User implements UserInterface
      */
     private $phoneNumber;
 
+    /**
+     * Returns true if this is currently authenticated user
+     *
+     * @Groups({"user:read"})
+     */
+    private $isMe;
+
     public function __construct()
     {
         $this->cheeseListings = new ArrayCollection();
@@ -248,4 +255,20 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getIsMe(): bool
+    {
+        if ($this->isMe === null) {
+            throw new \LogicException('isMe not initialized');
+        }
+
+        return $this->isMe;
+    }
+
+    public function setIsMe(bool $isMe): void
+    {
+        $this->isMe = $isMe;
+    }
+
+
 }
