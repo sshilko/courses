@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\ApiPlatform\CheeseSearchFilter;
 
 /**
  * @ApiResource(
@@ -43,6 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
  *     }
  * )
+ * @ApiFilter(CheeseSearchFilter::class)
  * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
  * @ApiFilter(SearchFilter::class, properties={
  *     "title": "partial",

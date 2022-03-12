@@ -136,5 +136,18 @@ class DailyStats
 use ApiPlatform\Core\DataProvider\Pagination;
         list($page, $offset, $limit) = $this->pagination->getPagination($resourceClass, $operationName);
 
+ Default built-in filters, only one-at-a-time supported
+
+ Custom filters supported
+ * DoctrineORM
+ * Elasticsearch
+ * completely custom resource
+ 
+ Custom filters support is !QUESTIONABLE! across
+ openapi  / swagger / jsonld / graphql
+ with some options supported and some not
+ documentation somewhere works somewhere not
+ 
+ 
  
 ```
