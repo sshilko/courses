@@ -157,7 +157,10 @@ BadReqyestHttoException 400 anytime
  using output Dto will transform the original entity tclass to output class
  THEN output class is serialized
    
- 
+   
+DTO: can have different DTO's on different operations
+   
+composer require symfony/debug-bundle 
  
 ```
 

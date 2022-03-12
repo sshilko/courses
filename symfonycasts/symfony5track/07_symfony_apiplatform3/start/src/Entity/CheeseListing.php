@@ -17,11 +17,12 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\ApiPlatform\CheeseSearchFilter;
 use App\Dto\CheeseListingOutput;
+use App\Dto\CheeseListingInput;
 
 /**
  * @ApiResource(
- *     output=CheeseListingOutput::class,
  *     normalizationContext={"groups"={"cheese:read"}},
+ *     input=CheeseListingInput::class,
  *     denormalizationContext={"groups"={"cheese:write"}},
  *     itemOperations={
  *          "get"={
@@ -156,18 +157,18 @@ class CheeseListing
         return $this;
     }
 
-    /**
-     * The description of the cheese as raw text.
-     *
-     * @Groups({"cheese:write", "user:write"})
-     * @SerializedName("description")
-     */
-    public function setTextDescription(string $description): self
-    {
-        $this->description = nl2br($description);
-
-        return $this;
-    }
+//    /**
+//     * The description of the cheese as raw text.
+//     *
+//     * @Groups({"cheese:write", "user:write"})
+//     * @SerializedName("description")
+//     */
+//    public function setTextDescription(string $description): self
+//    {
+//        $this->description = nl2br($description);
+//
+//        return $this;
+//    }
 
     public function getPrice(): ?int
     {
