@@ -13,7 +13,8 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  * @ApiResource(
  *     paginationItemsPerPage=7,
  *     normalizationContext={"groups"={"daily-stats:read"}},
- *     itemOperations={"get"},
+ *     denormalizationContext={"groups"={"daily-stats:write"}},
+ *     itemOperations={"get", "put"},
  *     collectionOperations={"get"}
  * )
  */
@@ -25,7 +26,7 @@ class DailyStats
     public $date;
 
     /**
-     * @Groups({"daily-stats:read"})
+     * @Groups({"daily-stats:read", "daily-stats:write"})
      * @var int
      */
     public int $totalVisitors;
