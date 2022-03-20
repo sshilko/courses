@@ -1,0 +1,24 @@
+https://peps.python.org/pep-0000/#finished-peps-done-with-a-stable-interface
+
+
+2006 - PEP 3107 – Function Annotations
+https://peps.python.org/pep-3107/
+
+2011 - PEP 405 – Python Virtual Environments
+https://peps.python.org/pep-0405/
+Python-Version 3.3
+https://virtualenv.pypa.io/en/latest/
+
+2014 - PEP 0484 - Type Hints
+https://peps.python.org/pep-0484/
+
+Python Environment 101
+https://towardsdatascience.com/python-environment-101-1d68bda3094d
+
+Python Tox
+https://christophergs.com/python/2020/04/12/python-tox-why-use-it-and-tutorial/
+
+Installing requirements with PIP
+https://note.nkmk.me/en/python-pip-install-requirements/
+
+

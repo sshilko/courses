@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.apachedeployment.name }}
+  labels:
+    {{- with .Values.apachedeployment.labels }}
+    {{ toYaml . }}
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      {{- with .Values.apachedeployment.labels }}
+      {{ toYaml . }}
+      {{- end }}  
+  template:
+    metadata:
+      labels:
+        {{- with .Values.apachedeployment.labels }}
+        {{ toYaml . }}
+        {{- end }}  
+    spec:
+      containers:
+        - name: "{{ .Values.apachedeployment.name }}-container"
+          image: "{{ .Values.apachedeployment.image }}:{{ .Values.apachedeployment.imageversion }}"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http

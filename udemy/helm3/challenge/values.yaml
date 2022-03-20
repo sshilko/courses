@@ -1,0 +1,11 @@
+apachedeployment:
+    name: challenge
+    image: httpd
+    imageversion: 2.4
+    labels:
+        app: apache
+apachesvc:
+    name: challengesvc
+    nodePort: 31234
+    labels:
+        app: apache-svc
